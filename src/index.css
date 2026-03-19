@@ -1,0 +1,375 @@
+@import "tailwindcss";
+
+@theme {
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-animStar-50s: animStar 50s linear infinite;
+  --animate-animStar-80s: animStar 80s linear infinite;
+  
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+  }
+  
+  @keyframes animStar {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-2000px); }
+  }
+
+  --font-outfit: "Outfit", sans-serif;
+  --font-space: "Space Grotesk", sans-serif;
+  --font-anton: "Anton", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  
+  --color-forest: #01472e;
+  --color-sage: #ccd5ae;
+  --color-olive: #e9edc9;
+  --color-cream: #fefae0;
+  --color-moss: #a3b18a;
+
+  --drop-shadow-floating: 0 25px 50px -12px rgba(1, 71, 46, 0.2);
+
+  /* Neumorphic 2.0 Theme Variables */
+  --color-nm-bg: #e0e5ec;
+  --color-nm-text: #4a5568;
+  --color-nm-hl: #ffffff;
+  --color-nm-sh: #a3b1c6;
+  
+  --color-nm-dark-bg: #1e2030;
+  --color-nm-dark-text: #e2e8f0;
+  --color-nm-dark-hl: #2a2d42;
+  --color-nm-dark-sh: #14152a;
+
+  --font-satoshi: 'Satoshi', sans-serif;
+  --font-general: 'General Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Red Noir Star Backgrounds */
+.stars-1 { box-shadow: 234px 124px #fff, 654px 345px #fff, 876px 12px #fff, 1200px 800px #fff, 400px 1500px #fff, 1800px 200px #fff, 100px 1000px #fff, 900px 1900px #fff, 500px 600px #fff, 1400px 100px #fff, 300px 400px #fff, 1600px 1200px #fff; }
+.stars-2 { box-shadow: 123px 456px #fff, 789px 234px #fff, 456px 890px #fff, 1100px 300px #fff, 200px 1200px #fff, 1500px 500px #fff, 600px 1700px #fff, 1300px 900px #fff; }
+
+/* Dark Mode Neumorphic Override Class */
+.dark-neumorphic {
+  --color-nm-bg: var(--color-nm-dark-bg);
+  --color-nm-text: var(--color-nm-dark-text);
+  --color-nm-hl: var(--color-nm-dark-hl);
+  --color-nm-sh: var(--color-nm-dark-sh);
+}
+
+/* Neumorphic Utilities */
+@layer utilities {
+  .nm-flat {
+    background-color: var(--color-nm-bg);
+    box-shadow: 6px 6px 12px var(--color-nm-sh), -6px -6px 12px var(--color-nm-hl);
+  }
+  .nm-inset {
+    background-color: var(--color-nm-bg);
+    box-shadow: inset 4px 4px 8px var(--color-nm-sh), inset -4px -4px 8px var(--color-nm-hl);
+  }
+  .nm-flat-hover {
+    background-color: var(--color-nm-bg);
+    box-shadow: 6px 6px 12px var(--color-nm-sh), -6px -6px 12px var(--color-nm-hl);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .nm-flat-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 10px 10px 20px var(--color-nm-sh), -10px -10px 20px var(--color-nm-hl);
+  }
+  .nm-button {
+    background-color: var(--color-nm-bg);
+    box-shadow: 6px 6px 12px var(--color-nm-sh), -6px -6px 12px var(--color-nm-hl);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .nm-button:active {
+    box-shadow: inset 4px 4px 8px var(--color-nm-sh), inset -4px -4px 8px var(--color-nm-hl);
+    transform: translateY(-2px) scale(1.04);
+  }
+  .nm-button:hover {
+    transform: translateY(-2px) scale(1.04);
+  }
+}
+
+/* Custom Animations */
+@keyframes waveShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes float-icon {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slide-bounce {
+  0% { transform: translateX(-50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes counter-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate-waveShimmer {
+  animation: waveShimmer 2s linear infinite;
+}
+
+.animate-ripple {
+  animation: ripple 700ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-float-icon {
+  animation: float-icon 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.animate-slide-bounce {
+  animation: slide-bounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-counter-pulse {
+  animation: counter-pulse 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* --- REPLICATED LOADER CSS --- */
+.loader-wrapper {
+  position: absolute;
+  top: 50%;
+  margin-left: -50px;
+  left: 50%;
+  animation: speeder 0.4s linear infinite;
+  z-index: 10;
+}
+
+.loader-wrapper > span {
+  height: 5px;
+  width: 35px;
+  background: #000;
+  position: absolute;
+  top: -19px;
+  left: 60px;
+  border-radius: 2px 10px 1px 0;
+}
+
+.base span {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-right: 100px solid #000;
+  border-bottom: 6px solid transparent;
+}
+
+.base span:before {
+  content: "";
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background: #000;
+  position: absolute;
+  right: -110px;
+  top: -16px;
+}
+
+.base span:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 0 solid transparent;
+  border-right: 55px solid #000;
+  border-bottom: 16px solid transparent;
+  top: -16px;
+  right: -98px;
+}
+
+.face {
+  position: absolute;
+  height: 12px;
+  width: 20px;
+  background: #000;
+  border-radius: 20px 20px 0 0;
+  transform: rotate(-40deg);
+  right: -125px;
+  top: -15px;
+}
+
+.face:after {
+  content: "";
+  height: 12px;
+  width: 12px;
+  background: #000;
+  right: 4px;
+  top: 7px;
+  position: absolute;
+  transform: rotate(40deg);
+  transform-origin: 50% 50%;
+  border-radius: 0 0 0 2px;
+}
+
+.loader-wrapper > span > span:nth-child(1),
+.loader-wrapper > span > span:nth-child(2),
+.loader-wrapper > span > span:nth-child(3),
+.loader-wrapper > span > span:nth-child(4) {
+  width: 30px;
+  height: 1px;
+  background: #000;
+  position: absolute;
+  animation: fazer1 0.2s linear infinite;
+}
+
+.loader-wrapper > span > span:nth-child(2) {
+  top: 3px;
+  animation: fazer2 0.4s linear infinite;
+}
+
+.loader-wrapper > span > span:nth-child(3) {
+  top: 1px;
+  animation: fazer3 0.4s linear infinite;
+  animation-delay: -1s;
+}
+
+.loader-wrapper > span > span:nth-child(4) {
+  top: 4px;
+  animation: fazer4 1s linear infinite;
+  animation-delay: -1s;
+}
+
+@keyframes fazer1 {
+  0% { left: 0; }
+  100% { left: -80px; opacity: 0; }
+}
+@keyframes fazer2 {
+  0% { left: 0; }
+  100% { left: -100px; opacity: 0; }
+}
+@keyframes fazer3 {
+  0% { left: 0; }
+  100% { left: -50px; opacity: 0; }
+}
+@keyframes fazer4 {
+  0% { left: 0; }
+  100% { left: -150px; opacity: 0; }
+}
+
+@keyframes speeder {
+  0% { transform: translate(2px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -3px) rotate(-1deg); }
+  20% { transform: translate(-2px, 0px) rotate(1deg); }
+  30% { transform: translate(1px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 3px) rotate(-1deg); }
+  60% { transform: translate(-1px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-2px, -1px) rotate(1deg); }
+  90% { transform: translate(2px, 1px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.longfazers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.longfazers span {
+  position: absolute;
+  height: 2px;
+  width: 20%;
+  background: #000;
+  opacity: 0.1;
+}
+
+.longfazers span:nth-child(1) {
+  top: 20%;
+  animation: lf 0.6s linear infinite;
+  animation-delay: -5s;
+}
+
+.longfazers span:nth-child(2) {
+  top: 40%;
+  animation: lf2 0.8s linear infinite;
+  animation-delay: -1s;
+}
+
+.longfazers span:nth-child(3) {
+  top: 60%;
+  animation: lf3 0.6s linear infinite;
+}
+
+.longfazers span:nth-child(4) {
+  top: 80%;
+  animation: lf4 0.5s linear infinite;
+  animation-delay: -3s;
+}
+
+@keyframes lf { 0% { left: 200%; } 100% { left: -200%; opacity: 0; } }
+@keyframes lf2 { 0% { left: 200%; } 100% { left: -200%; opacity: 0; } }
+@keyframes lf3 { 0% { left: 200%; } 100% { left: -100%; opacity: 0; } }
+@keyframes lf4 { 0% { left: 200%; } 100% { left: -100%; opacity: 0; } }
+
+/* Styling the background */
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+}
+
+@keyframes progress {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(50%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-progress {
+  animation: progress 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.reveal-transition {
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-up-transition {
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal-up-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(100px); }
+  to { opacity: 1; transform: translateY(0); }
+}
